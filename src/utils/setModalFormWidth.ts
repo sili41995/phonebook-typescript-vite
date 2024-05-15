@@ -1,4 +1,4 @@
-import { FormTypes } from 'constants/index';
+import { FormTypes } from '@/constants';
 
 const setModalFormWidth = (formType: FormTypes | undefined): string => {
   switch (formType) {

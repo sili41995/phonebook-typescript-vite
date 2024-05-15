@@ -1,4 +1,4 @@
-import { ProfileEntry } from 'types/types';
+import { ProfileEntry } from '@/types/types';
 
 const filterEmptyFields = <T>(data: T): T => {
   const entries: ProfileEntry[] = Object.entries(data as Object);

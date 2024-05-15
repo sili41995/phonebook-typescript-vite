@@ -4,11 +4,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import store, { persistor } from 'redux/store';
-import App from 'components/App';
-import GlobalStyles from 'components/GlobalStyles';
-import Toast from 'components/Toast';
-import { theme } from 'constants/index';
+import store, { persistor } from '@/redux/store';
+import App from '@/components/App';
+import GlobalStyles from '@/components/GlobalStyles';
+import Toast from '@/components/Toast';
+import { theme } from '@/constants';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

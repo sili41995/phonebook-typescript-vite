@@ -1,4 +1,4 @@
-enum FormTypes {
+const enum FormTypes {
   filter = 'filter',
   authForm = 'authForm',
 }

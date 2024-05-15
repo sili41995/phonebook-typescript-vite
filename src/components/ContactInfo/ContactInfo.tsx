@@ -1,9 +1,9 @@
 import { useOutletContext } from 'react-router-dom';
 import { FaEnvelope, FaPhoneAlt, FaRegComment } from 'react-icons/fa';
-import { IContact } from 'types/types';
-import ActionLink from 'components/ActionLink';
-import { AriaLabels, IconBtnType, IconSizes } from 'constants/index';
-import { getPhoneNumber, getTelegramLink } from 'utils';
+import { IContact } from '@/types/types';
+import ActionLink from '@/components/ActionLink';
+import { AriaLabels, IconBtnType, IconSizes } from '@/constants';
+import { getPhoneNumber, getTelegramLink } from '@/utils';
 import { Title, Description, List, Item, Info } from './ContactInfo.styled';
 
 const ContactInfo = () => {

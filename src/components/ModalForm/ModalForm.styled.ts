@@ -7,7 +7,7 @@ import {
   setModalFormMargin,
   setModalFormPadding,
   setModalFormWidth,
-} from 'utils';
+} from '@/utils';
 
 export const Container = styled.div<IStyledProps>`
   display: flex;

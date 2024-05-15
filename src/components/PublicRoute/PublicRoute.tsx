@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { toasts } from 'utils';
-import { selectIsLoggedIn } from 'redux/auth/selectors';
-import { useAppSelector } from 'hooks/redux';
+import { toasts } from '@/utils';
+import { selectIsLoggedIn } from '@/redux/auth/selectors';
+import { useAppSelector } from '@/hooks/redux';
 import { IProps } from './PublicRoute.types';
-import { PagePaths } from 'constants/index';
+import { PagePaths } from '@/constants';
 
 export const PublicRoute = ({ element, restricted = false }: IProps) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);

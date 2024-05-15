@@ -1,4 +1,4 @@
-import { BtnType } from 'constants/index';
+import { BtnType } from '@/constants';
 import { IProps } from './IconButton.types';
 import { Button } from './IconButton.styled';
 
@@ -12,14 +12,7 @@ const IconButton = ({
   right = 0,
   ...props
 }: IProps) => (
-  <Button
-    type={type}
-    right={right}
-    top={top}
-    width={width}
-    onClick={onBtnClick}
-    {...props}
-  >
+  <Button type={type} right={right} top={top} width={width} onClick={onBtnClick} {...props}>
     {title ? (
       <>
         {icon}

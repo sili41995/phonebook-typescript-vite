@@ -1,4 +1,4 @@
-import { IState } from 'types/types';
+import { IState } from '@/types/types';
 
 export const selectContacts = (state: IState) => state.contacts.items;
 

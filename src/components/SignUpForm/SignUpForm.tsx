@@ -1,36 +1,17 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import {
-  FaUser,
-  FaLock,
-  FaMapMarkerAlt,
-  FaRegCalendarCheck,
-  FaPhoneAlt,
-  FaEnvelope,
-} from 'react-icons/fa';
-import {
-  filterEmptyFields,
-  getProfileFormData,
-  onChangeAvatar,
-  toasts,
-} from 'utils';
-import Input from 'components/Input';
-import AuthFormBtn from 'components/AuthFormBtn';
-import AuthFormMessage from 'components/AuthFormMessage';
-import { signUpUser } from 'redux/auth/operations';
-import { selectIsLoading } from 'redux/auth/selectors';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { ISignUpCredentials } from 'types/types';
-import {
-  PagePaths,
-  regExp,
-  FormTypes,
-  IconSizes,
-  InputTypes,
-  Messages,
-} from 'constants/index';
-import image from 'images/default-profile-avatar.png';
+import { FaUser, FaLock, FaMapMarkerAlt, FaRegCalendarCheck, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { filterEmptyFields, getProfileFormData, onChangeAvatar, toasts } from '@/utils';
+import Input from '@/components/Input';
+import AuthFormBtn from '@/components/AuthFormBtn';
+import AuthFormMessage from '@/components/AuthFormMessage';
+import { signUpUser } from '@/redux/auth/operations';
+import { selectIsLoading } from '@/redux/auth/selectors';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { ISignUpCredentials } from '@/types/types';
+import { PagePaths, regExp, FormTypes, IconSizes, InputTypes, Messages } from '@/constants';
+import image from '@/images/default-profile-avatar.png';
 import { Form, Message, Title, Image } from './SignUpForm.styled';
 
 const SignUpForm = () => {
@@ -77,17 +58,9 @@ const SignUpForm = () => {
   useEffect(() => {
     errors.name && toasts.errorToast('First name is required');
     errors.email &&
-      toasts.errorToast(
-        errors.email.type === 'required'
-          ? Messages.emailReqErr
-          : Messages.emailRegExpErr
-      );
+      toasts.errorToast(errors.email.type === 'required' ? Messages.emailReqErr : Messages.emailRegExpErr);
     errors.password &&
-      toasts.errorToast(
-        errors.password.type === 'required'
-          ? Messages.passwordReqErr
-          : Messages.passwordMinLengthErr
-      );
+      toasts.errorToast(errors.password.type === 'required' ? Messages.passwordReqErr : Messages.passwordMinLengthErr);
     errors.phone && toasts.errorToast(Messages.phoneRegExpErr);
   }, [errors, isSubmitting]);
 
@@ -101,15 +74,7 @@ const SignUpForm = () => {
           accept="image/png, image/jpeg, image/jpg"
           onChange={onChangeInput}
           type={InputTypes.file}
-          altElem={
-            <Image
-              src={image}
-              alt="profile avatar"
-              width="150"
-              height="150"
-              ref={userAvatarRef}
-            />
-          }
+          altElem={<Image src={image} alt="profile avatar" width="150" height="150" ref={userAvatarRef} />}
         />
         <Input
           settings={{ ...register('name', { required: true }) }}
@@ -178,11 +143,7 @@ const SignUpForm = () => {
           formType={FormTypes.authForm}
           inputWrap
         />
-        <AuthFormMessage
-          action="Sign in"
-          pageLink={signInPageLink}
-          message="if you have an account"
-        />
+        <AuthFormMessage action="Sign in" pageLink={signInPageLink} message="if you have an account" />
         <AuthFormBtn title="Enlist" disabled={isLoading} />
       </Form>
     </>

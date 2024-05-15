@@ -1,4 +1,4 @@
-import initialState from 'redux/initialState';
+import initialState from '@/redux/initialState';
 import {
   IAvatar,
   IContact,
@@ -8,7 +8,7 @@ import {
   IFetchContactsRes,
   ISignInRes,
   ISignUpRes,
-} from 'types/types';
+} from '@/types/types';
 
 class ContactsServiceApi {
   private BASE_URL = 'https://contacts-rest-api-ts.onrender.com/api';
@@ -137,13 +137,7 @@ class ContactsServiceApi {
       });
   }
 
-  fetchContactById({
-    signal,
-    id,
-  }: {
-    signal: AbortSignal;
-    id: string;
-  }): Promise<IContact> {
+  fetchContactById({ signal, id }: { signal: AbortSignal; id: string }): Promise<IContact> {
     const options = {
       signal,
       method: 'GET',
@@ -191,23 +185,15 @@ class ContactsServiceApi {
       },
     };
 
-    return fetch(`${this.BASE_URL}/contacts/${id}`, options).then(
-      (response) => {
-        if (!response.ok) {
-          throw new Error('Deleting a contact failed');
-        }
-        return response.json();
+    return fetch(`${this.BASE_URL}/contacts/${id}`, options).then((response) => {
+      if (!response.ok) {
+        throw new Error('Deleting a contact failed');
       }
-    );
+      return response.json();
+    });
   }
 
-  updateContact({
-    id,
-    data,
-  }: {
-    id: string;
-    data: IContact;
-  }): Promise<IContact> {
+  updateContact({ id, data }: { id: string; data: IContact }): Promise<IContact> {
     const options = {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -227,13 +213,7 @@ class ContactsServiceApi {
       });
   }
 
-  updateContactAvatar({
-    id,
-    data,
-  }: {
-    id: string;
-    data: FormData;
-  }): Promise<IAvatar> {
+  updateContactAvatar({ id, data }: { id: string; data: FormData }): Promise<IAvatar> {
     const options = {
       method: 'PATCH',
       body: data,
@@ -252,13 +232,7 @@ class ContactsServiceApi {
       });
   }
 
-  updateContactStatus({
-    id,
-    data,
-  }: {
-    id: string;
-    data: IContactStatus;
-  }): Promise<IContact> {
+  updateContactStatus({ id, data }: { id: string; data: IContactStatus }): Promise<IContact> {
     const options = {
       method: 'PATCH',
       body: JSON.stringify(data),

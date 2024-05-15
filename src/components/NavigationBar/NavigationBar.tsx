@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import PrivateLinks from 'components/PrivateLinks';
-import PublicLinks from 'components/PublicLinks';
-import { selectIsLoggedIn } from 'redux/auth/selectors';
-import { useAppSelector } from 'hooks/redux';
-import { PagePaths } from 'constants/index';
+import PrivateLinks from '@/components/PrivateLinks';
+import PublicLinks from '@/components/PublicLinks';
+import { selectIsLoggedIn } from '@/redux/auth/selectors';
+import { useAppSelector } from '@/hooks/redux';
+import { PagePaths } from '@/constants';
 import { NavContainer, List, ListItem } from './NavigationBar.styled';
 
 const NavigationBar = () => {

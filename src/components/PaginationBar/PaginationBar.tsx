@@ -1,17 +1,15 @@
 import { FC, MouseEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { IProps } from './PaginationBar.types';
-import { getPageNumbers, getPaginationBarSettings, makeBlur } from 'utils';
-import { AriaLabels, SearchParamsKeys } from 'constants/index';
+import { getPageNumbers, getPaginationBarSettings, makeBlur } from '@/utils';
+import { AriaLabels, SearchParamsKeys } from '@/constants';
 import { Button, Item, List, TemplateItem } from './PaginationBar.styled';
-
-const { PAGE_SP_KEY } = SearchParamsKeys;
 
 const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const pageQuantity = Math.ceil(itemsQuantity / quantity);
   const pageNumbers = getPageNumbers(pageQuantity);
-  const currentPage = Number(searchParams.get(PAGE_SP_KEY) ?? 1);
+  const currentPage = Number(searchParams.get(SearchParamsKeys.PAGE_SP_KEY) ?? 1);
   const {
     firstPage,
     lastPage,
@@ -28,15 +26,9 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
     step,
   });
 
-  const onPageBtnClick = ({
-    e,
-    page,
-  }: {
-    e: MouseEvent<HTMLButtonElement>;
-    page: number;
-  }): void => {
+  const onPageBtnClick = ({ e, page }: { e: MouseEvent<HTMLButtonElement>; page: number }): void => {
     makeBlur(e.currentTarget);
-    searchParams.set(PAGE_SP_KEY, String(page));
+    searchParams.set(SearchParamsKeys.PAGE_SP_KEY, String(page));
     setSearchParams(searchParams);
   };
 
@@ -70,12 +62,7 @@ const PaginationBar: FC<IProps> = ({ itemsQuantity, quantity, step = 1 }) => {
       )}
       {isValidPage &&
         pageNumbers.map((number) => (
-          <Item
-            key={number}
-            page={number}
-            currentPage={currentPage}
-            step={step}
-          >
+          <Item key={number} page={number} currentPage={currentPage} step={step}>
             <Button
               className={number === currentPage ? 'active' : ''}
               aria-label={`${AriaLabels.pageBtn} ${number}`}

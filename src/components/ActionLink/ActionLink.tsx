@@ -1,6 +1,6 @@
 import { FC, MouseEvent } from 'react';
 import { IProps } from './ActionLink.types';
-import { makeBlur } from 'utils';
+import { makeBlur } from '@/utils';
 import { Link } from './ActionLink.styled';
 
 const ActionLink: FC<IProps> = ({ link, icon, btnType, ...otherProps }) => {

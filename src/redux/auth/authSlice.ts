@@ -1,13 +1,7 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import initialState from 'redux/initialState';
-import {
-  refreshUser,
-  signInUser,
-  signOutUser,
-  signUpUser,
-  updateUserAvatar,
-} from './operations';
-import { IAuthState } from 'types/types';
+import initialState from '@/redux/initialState';
+import { refreshUser, signInUser, signOutUser, signUpUser, updateUserAvatar } from './operations';
+import { IAuthState } from '@/types/types';
 
 const authState: IAuthState = initialState.auth;
 
@@ -17,7 +11,7 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(signUpUser.fulfilled, (state, { payload }) => ({
+      .addCase(signUpUser.fulfilled, () => ({
         ...initialState.auth,
       }))
       .addCase(signInUser.fulfilled, (state, { payload }) => ({
@@ -63,12 +57,7 @@ const authSlice = createSlice({
         isRefreshing: false,
       }))
       .addMatcher(
-        isAnyOf(
-          signUpUser.pending,
-          signInUser.pending,
-          signOutUser.pending,
-          updateUserAvatar.pending
-        ),
+        isAnyOf(signUpUser.pending, signInUser.pending, signOutUser.pending, updateUserAvatar.pending),
         (state) => ({
           ...state,
           isLoading: true,

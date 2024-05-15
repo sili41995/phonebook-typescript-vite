@@ -1,44 +1,17 @@
 import { FC, useEffect } from 'react';
-import {
-  FaUser,
-  FaPhoneAlt,
-  FaEnvelope,
-  FaInfo,
-  FaTelegramPlane,
-  FaIdCardAlt,
-  FaCheck,
-} from 'react-icons/fa';
-import { Messages, IconSizes, InputTypes, regExp } from 'constants/index';
-import Input from 'components/Input';
-import { toasts } from 'utils';
+import { FaUser, FaPhoneAlt, FaEnvelope, FaInfo, FaTelegramPlane, FaIdCardAlt, FaCheck } from 'react-icons/fa';
+import { Messages, IconSizes, InputTypes, regExp } from '@/constants';
+import Input from '@/components/Input';
+import { toasts } from '@/utils';
 import { IProps } from './ContactFormInputs.types';
 import { CheckboxTitle, InputWrap } from './ContactFormInputs.styled';
 
-const ContactFormInputs: FC<IProps> = ({
-  register,
-  errors,
-  isSubmitting,
-  onCheckboxChange,
-  checked,
-  contact = {},
-}) => {
-  const {
-    name = '',
-    phone = '',
-    email = '',
-    role = '',
-    tgUsername = '',
-    description = '',
-  } = contact;
+const ContactFormInputs: FC<IProps> = ({ register, errors, isSubmitting, onCheckboxChange, checked, contact = {} }) => {
+  const { name = '', phone = '', email = '', role = '', tgUsername = '', description = '' } = contact;
 
   useEffect(() => {
     errors.name && toasts.errorToast(Messages.firstNameReqErr);
-    errors.phone &&
-      toasts.errorToast(
-        errors.phone.type === 'required'
-          ? 'Phone is required'
-          : Messages.phoneRegExpErr
-      );
+    errors.phone && toasts.errorToast(errors.phone.type === 'required' ? 'Phone is required' : Messages.phoneRegExpErr);
     errors.email && toasts.errorToast(Messages.emailRegExpErr);
   }, [errors, isSubmitting]);
 

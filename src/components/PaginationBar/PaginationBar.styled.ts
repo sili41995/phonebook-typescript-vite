@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { IStyledProps } from './PaginationBar.types';
-import { setBtnDisplayProp } from 'utils';
+import { setBtnDisplayProp } from '@/utils';
 
 export const List = styled.ul`
   display: flex;
@@ -8,8 +8,7 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li<IStyledProps>`
-  display: ${({ currentPage, page, step }) =>
-    setBtnDisplayProp({ currentPage, page, step })};
+  display: ${({ currentPage, page, step }) => setBtnDisplayProp({ currentPage, page, step })};
 `;
 
 export const TemplateItem = styled.li`
@@ -28,8 +27,7 @@ export const Button = styled.button`
   padding: ${({ theme }) => theme.spacing(2)};
   background-color: transparent;
   border-color: transparent;
-  border-radius: ${({ theme }) =>
-    `${theme.borderRadius.primaryBorderRadius}px`};
+  border-radius: ${({ theme }) => `${theme.borderRadius.primaryBorderRadius}px`};
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Jua;
   font-size: ${({ theme }) => `${theme.fontSize.secondaryFontSize}px`};

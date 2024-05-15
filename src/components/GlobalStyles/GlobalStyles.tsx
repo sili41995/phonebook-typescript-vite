@@ -1,7 +1,7 @@
 import { Global, css } from '@emotion/react';
 import 'modern-normalize';
 import 'react-toastify/dist/ReactToastify.css';
-import { juaRegular, interMedium, interSemiBold } from 'fonts';
+import { juaRegular, interMedium, interSemiBold } from '@/fonts';
 
 const GlobalStyles = () => (
   <Global
@@ -25,17 +25,15 @@ const GlobalStyles = () => (
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-          'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-          'Helvetica Neue', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+          'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         overflow-y: scroll;
       }
 
       code {
-        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-          monospace;
+        font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
       }
 
       h1,

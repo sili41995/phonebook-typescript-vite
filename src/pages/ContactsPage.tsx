@@ -1,26 +1,22 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import UserProfile from 'components/UserProfile';
-import Loader from 'components/Loader';
-import ContactsContainer from 'components/ContactsContainer';
-import { selectIsLoaded } from 'redux/contacts/selectors';
-import { fetchContacts } from 'redux/contacts/operations';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import contactsServiceApi from 'service/contactsServiceApi';
-import { ICurrentUser } from 'types/types';
-import { toasts } from 'utils';
-import { FetchStatuses } from 'constants/index';
-
-const { idle, pending, resolved, rejected } = FetchStatuses;
+import UserProfile from '@/components/UserProfile';
+import Loader from '@/components/Loader';
+import ContactsContainer from '@/components/ContactsContainer';
+import { selectIsLoaded } from '@/redux/contacts/selectors';
+import { fetchContacts } from '@/redux/contacts/operations';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import contactsServiceApi from '@/service/contactsServiceApi';
+import { ICurrentUser } from '@/types/types';
+import { toasts } from '@/utils';
+import { FetchStatuses } from '@/constants';
 
 const ContactsPage = () => {
   const [user, setUser] = useState<ICurrentUser | null>(null);
-  const [fetchUserStatus, setFetchUserStatus] = useState<FetchStatuses>(
-    () => idle
-  );
+  const [fetchUserStatus, setFetchUserStatus] = useState<FetchStatuses>(() => FetchStatuses.idle);
   const dispatch = useAppDispatch();
   const isLoadedContacts = useAppSelector(selectIsLoaded);
-  const isLoadingUser = fetchUserStatus === pending;
+  const isLoadingUser = fetchUserStatus === FetchStatuses.pending;
   const isLoading = isLoadingUser || !isLoadedContacts;
 
   useEffect(() => {
@@ -33,15 +29,15 @@ const ContactsPage = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      setFetchUserStatus(pending);
+      setFetchUserStatus(FetchStatuses.pending);
       try {
         const user = await contactsServiceApi.refreshUser();
         setUser(user);
-        setFetchUserStatus(resolved);
+        setFetchUserStatus(FetchStatuses.resolved);
       } catch (error) {
         if (error instanceof Error) {
           toasts.errorToast(error.message);
-          setFetchUserStatus(rejected);
+          setFetchUserStatus(FetchStatuses.rejected);
         }
       }
     };

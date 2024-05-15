@@ -1,8 +1,6 @@
-import { FormTypes, theme } from 'constants/index';
+import { FormTypes, theme } from '@/constants';
 
-const setModalFormBackgroundColor = (
-  formType: FormTypes | undefined
-): string => {
+const setModalFormBackgroundColor = (formType: FormTypes | undefined): string => {
   switch (formType) {
     case FormTypes.authForm:
       return theme.colors.authFormBackgroundColor;

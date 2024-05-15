@@ -1,6 +1,5 @@
-import { PagePaths } from 'constants/index';
+import { PagePaths } from '@/constants';
 
-const getIsContactsPage = (path: string): boolean =>
-  path.includes(PagePaths.contactsPath);
+const getIsContactsPage = (path: string): boolean => path.includes(PagePaths.contactsPath);
 
 export default getIsContactsPage;

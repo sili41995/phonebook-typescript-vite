@@ -1,23 +1,17 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
-import { InputTypes } from 'constants/index';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import {
-  filterEmptyFields,
-  getIsContact,
-  getProfileFormData,
-  onChangeAvatar,
-  toasts,
-} from 'utils';
-import { IContact } from 'types/types';
-import { addContact } from 'redux/contacts/operations';
-import ContactFormInputs from 'components/ContactFormInputs';
-import ModalForm from 'components/ModalForm';
-import Input from 'components/Input';
-import GoBackLink from 'components/GoBackLink';
-import AcceptBtn from 'components/AcceptBtn';
-import image from 'images/default-profile-avatar.png';
+import { selectContacts, selectIsLoading } from '@/redux/contacts/selectors';
+import { InputTypes } from '@/constants';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import { filterEmptyFields, getIsContact, getProfileFormData, onChangeAvatar, toasts } from '@/utils';
+import { IContact } from '@/types/types';
+import { addContact } from '@/redux/contacts/operations';
+import ContactFormInputs from '@/components/ContactFormInputs';
+import ModalForm from '@/components/ModalForm';
+import Input from '@/components/Input';
+import GoBackLink from '@/components/GoBackLink';
+import AcceptBtn from '@/components/AcceptBtn';
+import image from '@/images/default-profile-avatar.png';
 import { ButtonsList, Item, Form, Title, Image } from './AddContactForm.styled';
 
 const AddContactForm: FC = () => {
@@ -86,15 +80,7 @@ const AddContactForm: FC = () => {
           accept="image/png, image/jpeg, image/jpg"
           onChange={onChangeFile}
           type={InputTypes.file}
-          altElem={
-            <Image
-              src={image}
-              alt="profile avatar"
-              width="150"
-              height="150"
-              ref={contactAvatarRef}
-            />
-          }
+          altElem={<Image src={image} alt="profile avatar" width="150" height="150" ref={contactAvatarRef} />}
         />
         <ContactFormInputs
           register={register}

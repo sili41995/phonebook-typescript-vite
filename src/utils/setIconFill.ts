@@ -1,4 +1,4 @@
-import { theme, IconBtnType } from 'constants/index';
+import { theme, IconBtnType } from '@/constants';
 
 function setIconFill(btnType: IconBtnType): string {
   switch (btnType) {

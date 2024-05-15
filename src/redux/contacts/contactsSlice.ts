@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import initialState from 'redux/initialState';
+import initialState from '@/redux/initialState';
 import {
   addContact,
   deleteContact,
@@ -8,8 +8,8 @@ import {
   updateContactAvatar,
   updateContactStatus,
 } from './operations';
-import { signOutUser } from 'redux/auth/operations';
-import { IContactsState } from 'types/types';
+import { signOutUser } from '@/redux/auth/operations';
+import { IContactsState } from '@/types/types';
 
 const contactsState: IContactsState = initialState.contacts;
 
@@ -42,32 +42,19 @@ const contactsSlice = createSlice({
       .addCase(updateContact.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        items: [
-          ...state.items.filter(({ _id }) => _id !== payload._id),
-          payload,
-        ],
+        items: [...state.items.filter(({ _id }) => _id !== payload._id), payload],
       }))
       .addCase(updateContactStatus.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
         items: [
-          ...state.items.map((item) =>
-            item._id !== payload._id
-              ? item
-              : { ...item, favorite: !item.favorite }
-          ),
+          ...state.items.map((item) => (item._id !== payload._id ? item : { ...item, favorite: !item.favorite })),
         ],
       }))
       .addCase(updateContactAvatar.fulfilled, (state, { payload }) => ({
         ...state,
         isLoading: false,
-        items: [
-          ...state.items.map((item) =>
-            item._id !== payload._id
-              ? item
-              : { ...item, avatar: payload.avatar }
-          ),
-        ],
+        items: [...state.items.map((item) => (item._id !== payload._id ? item : { ...item, avatar: payload.avatar }))],
       }))
       .addCase(signOutUser.fulfilled, (state) => ({
         ...state,

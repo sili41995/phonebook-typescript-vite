@@ -1,6 +1,6 @@
 import { ChangeEvent, RefObject } from 'react';
 import { SubmitHandler } from 'react-hook-form';
-import { IAvatar } from 'types/types';
+import { IAvatar } from '@/types/types';
 
 export interface IProps {
   avatar: string;

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { setButtonColor, setIconFill, setIconHoverEffect } from 'utils';
+import { setButtonColor, setIconFill, setIconHoverEffect } from '@/utils';
 import { IStyledProps } from './IconButton.types';
 
 export const Button = styled.button<IStyledProps>`
@@ -17,8 +17,7 @@ export const Button = styled.button<IStyledProps>`
   padding: ${({ theme }) => theme.spacing()};
   background-color: ${({ btnType }) => setButtonColor(btnType)};
   border-color: transparent;
-  border-radius: ${({ theme }) =>
-    `${theme.borderRadius.secondaryBorderRadius}px`};
+  border-radius: ${({ theme }) => `${theme.borderRadius.secondaryBorderRadius}px`};
   color: ${({ theme }) => theme.colors.primaryFontColor};
   font-family: Inter;
   font-size: ${({ theme }) => `${theme.fontSize.primaryFontSize}px`};
@@ -26,8 +25,7 @@ export const Button = styled.button<IStyledProps>`
   transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc};
   &:hover,
   &:focus {
-    box-shadow: ${({ theme, inputWrap }) =>
-      !inputWrap && theme.shadows.primaryShadow};
+    box-shadow: ${({ theme, inputWrap }) => !inputWrap && theme.shadows.primaryShadow};
   }
   & svg {
     color: ${({ btnType }) => setIconFill(btnType)};
@@ -35,7 +33,6 @@ export const Button = styled.button<IStyledProps>`
   }
   & svg:hover,
   & svg:focus {
-    color: ${({ btnType, inputWrap }) =>
-      inputWrap && setIconHoverEffect(btnType)};
+    color: ${({ btnType, inputWrap }) => inputWrap && setIconHoverEffect(btnType)};
   }
 `;

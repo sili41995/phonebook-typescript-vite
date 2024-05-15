@@ -1,4 +1,4 @@
-import { FormTypes, theme } from 'constants/index';
+import { FormTypes, theme } from '@/constants';
 
 const setModalFormBorderRadius = (formType: FormTypes | undefined): string => {
   switch (formType) {

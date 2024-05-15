@@ -1,4 +1,4 @@
-enum InputTypes {
+const enum InputTypes {
   text = 'text',
   password = 'password',
   email = 'email',

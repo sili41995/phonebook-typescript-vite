@@ -1,4 +1,4 @@
-import { FormTypes } from 'constants/index';
+import { FormTypes } from '@/constants';
 
 const setInputHeight = (formType: FormTypes | undefined): string => {
   switch (formType) {

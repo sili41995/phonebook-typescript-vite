@@ -1,25 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import initialState from 'redux/initialState';
-import contactsServiceApi from 'service/contactsServiceApi';
-import {
-  IState,
-  ISignInRes,
-  ICredentials,
-  ICurrentUser,
-  ISignUpRes,
-  IAvatar,
-} from 'types/types';
+import initialState from '@/redux/initialState';
+import contactsServiceApi from '@/service/contactsServiceApi';
+import { IState, ISignInRes, ICredentials, ICurrentUser, ISignUpRes, IAvatar } from '@/types/types';
 
-export const signUpUser = createAsyncThunk<
-  ISignUpRes,
-  FormData,
-  { rejectValue: string }
->(
+export const signUpUser = createAsyncThunk<ISignUpRes, FormData, { rejectValue: string }>(
   'auth/signUpUser',
-  async (
-    credentials: FormData,
-    { rejectWithValue }: { rejectWithValue: Function }
-  ) => {
+  async (credentials: FormData, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
       const response = await contactsServiceApi.signUpUser(credentials);
       return response;
@@ -31,18 +17,11 @@ export const signUpUser = createAsyncThunk<
   }
 );
 
-export const signInUser = createAsyncThunk<
-  ISignInRes,
-  ICredentials,
-  { rejectValue: string }
->(
+export const signInUser = createAsyncThunk<ISignInRes, ICredentials, { rejectValue: string }>(
   'auth/signInUser',
   async (
     credentials: ICredentials,
-    {
-      rejectWithValue,
-      signal,
-    }: { rejectWithValue: Function; signal: AbortSignal }
+    { rejectWithValue, signal }: { rejectWithValue: Function; signal: AbortSignal }
   ) => {
     try {
       const response = await contactsServiceApi.signInUser(credentials, signal);
@@ -59,11 +38,7 @@ export const signInUser = createAsyncThunk<
   }
 );
 
-export const signOutUser = createAsyncThunk<
-  undefined,
-  undefined,
-  { rejectValue: string }
->(
+export const signOutUser = createAsyncThunk<undefined, undefined, { rejectValue: string }>(
   'auth/signOutUser',
   async (_, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
@@ -77,19 +52,9 @@ export const signOutUser = createAsyncThunk<
   }
 );
 
-export const refreshUser = createAsyncThunk<
-  ICurrentUser,
-  undefined,
-  { rejectValue: string }
->(
+export const refreshUser = createAsyncThunk<ICurrentUser, undefined, { rejectValue: string }>(
   'auth/refreshUser',
-  async (
-    _,
-    {
-      rejectWithValue,
-      getState,
-    }: { rejectWithValue: Function; getState: Function }
-  ) => {
+  async (_, { rejectWithValue, getState }: { rejectWithValue: Function; getState: Function }) => {
     const state = getState() as IState;
     const { token } = state.auth;
     try {
@@ -104,16 +69,9 @@ export const refreshUser = createAsyncThunk<
   }
 );
 
-export const updateUserAvatar = createAsyncThunk<
-  IAvatar,
-  FormData,
-  { rejectValue: string }
->(
+export const updateUserAvatar = createAsyncThunk<IAvatar, FormData, { rejectValue: string }>(
   'auth/updateUserAvatar',
-  async (
-    data: FormData,
-    { rejectWithValue }: { rejectWithValue: Function }
-  ) => {
+  async (data: FormData, { rejectWithValue }: { rejectWithValue: Function }) => {
     try {
       const response = await contactsServiceApi.updateUserAvatar(data);
       return response;

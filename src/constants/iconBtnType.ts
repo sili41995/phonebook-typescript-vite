@@ -1,4 +1,4 @@
-enum IconBtnType {
+const enum IconBtnType {
   delete = 'delete',
   edit = 'edit',
   phone = 'phone',

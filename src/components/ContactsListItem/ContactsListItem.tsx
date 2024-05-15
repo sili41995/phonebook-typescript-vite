@@ -1,23 +1,13 @@
 import { AiFillStar, AiOutlineDelete } from 'react-icons/ai';
-import IconButton from 'components/IconButton';
-import LinkWithQuery from 'components/LinkWithQuery';
-import { selectIsLoading } from 'redux/contacts/selectors';
-import useDeleteContact from 'hooks/useDeleteContact';
-import { useAppSelector } from 'hooks/redux';
+import IconButton from '@/components/IconButton';
+import LinkWithQuery from '@/components/LinkWithQuery';
+import { selectIsLoading } from '@/redux/contacts/selectors';
+import useDeleteContact from '@/hooks/useDeleteContact';
+import { useAppSelector } from '@/hooks/redux';
 import { IProps } from './ContactsListItem.types';
-import { AriaLabels, IconSizes, PagePaths, Positions } from 'constants/index';
-import { IconBtnType } from 'constants/index';
-import {
-  Email,
-  Image,
-  Item,
-  Role,
-  Name,
-  Phone,
-  ContactInfo,
-  Person,
-  ImageContainer,
-} from './ContactsListItem.styled';
+import { AriaLabels, IconSizes, PagePaths, Positions } from '@/constants';
+import { IconBtnType } from '@/constants';
+import { Email, Image, Item, Role, Name, Phone, ContactInfo, Person, ImageContainer } from './ContactsListItem.styled';
 
 const ContactsListItem = ({ contact }: IProps) => {
   const { avatar, name, _id: id, role, phone, email, favorite } = contact;

@@ -9,7 +9,7 @@ import {
   setInputFontColor,
   setInputFontSize,
   setInputHoverEffect,
-} from 'utils';
+} from '@/utils';
 import { IStyledProps } from './Input.types';
 
 export const Container = styled.span`
@@ -62,13 +62,10 @@ export const Label = styled.label<IStyledProps>`
     height: 100%;
     padding: ${({ theme }) => theme.spacing(2)};
     border: 1px solid;
-    border-color: ${({ formType, checked }) =>
-      checked ? 'transparent' : setInputBorderColor(formType)};
+    border-color: ${({ formType, checked }) => (checked ? 'transparent' : setInputBorderColor(formType))};
     border-radius: ${({ formType }) => setInputBorderRadius(formType)};
-    background-color: ${({ theme, checked }) =>
-      checked ? theme.colors.otherColor : 'transparent'};
-    color: ${({ theme, checked }) =>
-      checked ? theme.colors.whiteColor : 'transparent'};
+    background-color: ${({ theme, checked }) => (checked ? theme.colors.otherColor : 'transparent')};
+    color: ${({ theme, checked }) => (checked ? theme.colors.whiteColor : 'transparent')};
     cursor: pointer;
     transition: box-shadow ${({ theme }) => theme.transitionDurationAndFunc},
       background-color ${({ theme }) => theme.transitionDurationAndFunc},

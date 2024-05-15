@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { IProps } from './AcceptBtn.types';
-import IconButton from 'components/IconButton';
-import { AriaLabels, BtnType, IconBtnType, IconSizes } from 'constants/index';
+import IconButton from '@/components/IconButton';
+import { AriaLabels, BtnType, IconBtnType, IconSizes } from '@/constants';
 
 const AcceptBtn: FC<IProps> = ({ disabled = false }) => (
   <IconButton

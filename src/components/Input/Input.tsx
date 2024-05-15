@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import IconButton from 'components/IconButton';
+import IconButton from '@/components/IconButton';
 import { IProps } from './Input.types';
-import { Positions, InputTypes } from 'constants/index';
+import { Positions, InputTypes } from '@/constants';
 import { Container, Label, StyledInput } from './Input.styled';
 
 const Input: FC<IProps> = ({
@@ -16,9 +16,7 @@ const Input: FC<IProps> = ({
   checked,
   ...otherProps
 }) => {
-  const input = (
-    <StyledInput type={type} checked={checked} {...settings} {...otherProps} />
-  );
+  const input = <StyledInput type={type} checked={checked} {...settings} {...otherProps} />;
 
   if (type === InputTypes.file || type === InputTypes.checkbox) {
     return (

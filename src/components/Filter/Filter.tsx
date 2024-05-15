@@ -1,37 +1,18 @@
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
-import {
-  FaSortAlphaDown,
-  FaSortAlphaUp,
-  FaSistrix,
-  FaTimes,
-} from 'react-icons/fa';
-import { makeBlur } from 'utils';
-import IconButton from 'components/IconButton';
-import Input from 'components/Input';
-import {
-  AriaLabels,
-  FormTypes,
-  IconBtnType,
-  IconSizes,
-  InputTypes,
-  SearchParamsKeys,
-  SortTypes,
-} from 'constants/index';
+import { FaSortAlphaDown, FaSortAlphaUp, FaSistrix, FaTimes } from 'react-icons/fa';
+import { makeBlur } from '@/utils';
+import IconButton from '@/components/IconButton';
+import Input from '@/components/Input';
+import { AriaLabels, FormTypes, IconBtnType, IconSizes, InputTypes, SearchParamsKeys, SortTypes } from '@/constants';
 import { FilterContainer, ButtonsList, Item } from './Filter.styled';
-import useSetSearchParams from 'hooks/useSetSearchParams';
-
-const { FILTER_SP_KEY, SORT_SP_KEY } = SearchParamsKeys;
-const { DESC_SORT_TYPE, ASC_SORT_TYPE } = SortTypes;
+import useSetSearchParams from '@/hooks/useSetSearchParams';
 
 const Filter = () => {
-  const { searchParams, updateSearchParams, setSearchParams } =
-    useSetSearchParams();
-  const filter = searchParams.get(FILTER_SP_KEY) ?? '';
+  const { searchParams, updateSearchParams, setSearchParams } = useSetSearchParams();
+  const filter = searchParams.get(SearchParamsKeys.FILTER_SP_KEY) ?? '';
   const [showFilter, setShowFilter] = useState<boolean>(() => Boolean(filter));
-  const descSortType = searchParams.get(SORT_SP_KEY) === DESC_SORT_TYPE;
-  const clearFilterBtnIcon = Boolean(filter) && (
-    <FaTimes size={IconSizes.primaryIconSize} />
-  );
+  const descSortType = searchParams.get(SearchParamsKeys.SORT_SP_KEY) === SortTypes.DESC_SORT_TYPE;
+  const clearFilterBtnIcon = Boolean(filter) && <FaTimes size={IconSizes.primaryIconSize} />;
   const sortBtnIcon = descSortType ? (
     <FaSortAlphaDown size={IconSizes.primaryIconSize} />
   ) : (
@@ -40,20 +21,20 @@ const Filter = () => {
 
   useEffect(() => {
     if (!showFilter) {
-      searchParams.delete(FILTER_SP_KEY);
+      searchParams.delete(SearchParamsKeys.FILTER_SP_KEY);
       setSearchParams(searchParams);
     }
   }, [searchParams, setSearchParams, showFilter]);
 
   const onSortBtnClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
     makeBlur(currentTarget);
-    const value = descSortType ? ASC_SORT_TYPE : DESC_SORT_TYPE;
-    updateSearchParams({ key: SORT_SP_KEY, value });
+    const value = descSortType ? SortTypes.ASC_SORT_TYPE : SortTypes.DESC_SORT_TYPE;
+    updateSearchParams({ key: SearchParamsKeys.SORT_SP_KEY, value });
   };
 
   const onFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    updateSearchParams({ key: FILTER_SP_KEY, value });
+    updateSearchParams({ key: SearchParamsKeys.FILTER_SP_KEY, value });
   };
 
   const onFilterBtnClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -62,7 +43,7 @@ const Filter = () => {
   };
 
   const onClearFilterBtnClick = () => {
-    updateSearchParams({ key: FILTER_SP_KEY });
+    updateSearchParams({ key: SearchParamsKeys.FILTER_SP_KEY });
   };
 
   return (

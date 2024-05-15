@@ -1,4 +1,4 @@
-enum PagePaths {
+const enum PagePaths {
   homePath = '/',
   contactsPath = 'contacts',
   aboutPath = 'about',

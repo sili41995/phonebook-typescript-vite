@@ -1,52 +1,32 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  AiFillStar,
-  AiOutlineDelete,
-  AiOutlineEdit,
-  AiOutlineStar,
-} from 'react-icons/ai';
-import DefaultMessage from 'components/DefaultMessage';
-import ContactProfile from 'components/ContactProfile';
-import GoBackLink from 'components/GoBackLink';
-import IconButton from 'components/IconButton';
-import Loader from 'components/Loader';
-import {
-  AriaLabels,
-  FetchStatuses,
-  IconBtnType,
-  IconSizes,
-  PagePaths,
-} from 'constants/index';
-import { IContact } from 'types/types';
-import contactsServiceApi from 'service/contactsServiceApi';
-import { makeBlur, toasts } from 'utils';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import useDeleteContact from 'hooks/useDeleteContact';
-import { selectIsLoading } from 'redux/contacts/selectors';
-import { updateContactStatus } from 'redux/contacts/operations';
-import {
-  ButtonsContainer,
-  Container,
-  ButtonsList,
-  Item,
-} from './ContactDetails.styled';
-
-const { idle, pending, resolved, rejected } = FetchStatuses;
+import { AiFillStar, AiOutlineDelete, AiOutlineEdit, AiOutlineStar } from 'react-icons/ai';
+import DefaultMessage from '@/components/DefaultMessage';
+import ContactProfile from '@/components/ContactProfile';
+import GoBackLink from '@/components/GoBackLink';
+import IconButton from '@/components/IconButton';
+import Loader from '@/components/Loader';
+import { AriaLabels, FetchStatuses, IconBtnType, IconSizes, PagePaths } from '@/constants';
+import { IContact } from '@/types/types';
+import contactsServiceApi from '@/service/contactsServiceApi';
+import { makeBlur, toasts } from '@/utils';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import useDeleteContact from '@/hooks/useDeleteContact';
+import { selectIsLoading } from '@/redux/contacts/selectors';
+import { updateContactStatus } from '@/redux/contacts/operations';
+import { ButtonsContainer, Container, ButtonsList, Item } from './ContactDetails.styled';
 
 const ContactDetails = () => {
   const deleteContact = useDeleteContact();
   const dispatch = useAppDispatch();
   const [contact, setContact] = useState<IContact | null>(null);
   const [editContact, setEditContact] = useState<boolean>(false);
-  const [fetchContactStatus, setFetchContactStatus] = useState<FetchStatuses>(
-    () => idle
-  );
+  const [fetchContactStatus, setFetchContactStatus] = useState<FetchStatuses>(() => FetchStatuses.idle);
   const id = useParams()[PagePaths.dynamicParam];
   const isLoading = useAppSelector(selectIsLoading);
-  const isLoadingContact = fetchContactStatus === pending;
-  const isLoadedContact = fetchContactStatus === resolved && contact;
-  const isFetchError = fetchContactStatus === rejected;
+  const isLoadingContact = fetchContactStatus === FetchStatuses.pending;
+  const isLoadedContact = fetchContactStatus === FetchStatuses.resolved && contact;
+  const isFetchError = fetchContactStatus === FetchStatuses.rejected;
   const favoriteBtnIcon = contact?.favorite ? (
     <AiFillStar size={IconSizes.primaryIconSize} />
   ) : (
@@ -61,18 +41,18 @@ const ContactDetails = () => {
     const controller = new AbortController();
 
     const getContact = async (id: string) => {
-      setFetchContactStatus(pending);
+      setFetchContactStatus(FetchStatuses.pending);
       try {
         const contact = await contactsServiceApi.fetchContactById({
           id,
           signal: controller.signal,
         });
         setContact(contact);
-        setFetchContactStatus(resolved);
+        setFetchContactStatus(FetchStatuses.resolved);
       } catch (error) {
         if (error instanceof Error && error.name !== 'AbortError') {
           toasts.errorToast(error.message);
-          setFetchContactStatus(rejected);
+          setFetchContactStatus(FetchStatuses.rejected);
         }
       }
     };
@@ -106,10 +86,7 @@ const ContactDetails = () => {
       .unwrap()
       .then(() => {
         toasts.successToast('Contact status updated successfully');
-        setContact(
-          (prevState) =>
-            ({ ...prevState, favorite: !prevState?.favorite } as IContact)
-        );
+        setContact((prevState) => ({ ...prevState, favorite: !prevState?.favorite } as IContact));
       })
       .catch((error) => {
         toasts.errorToast(error);

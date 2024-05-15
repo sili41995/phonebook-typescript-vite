@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { toasts } from 'utils';
-import { deleteContact } from 'redux/contacts/operations';
-import { useAppDispatch } from 'hooks/redux';
-import { PagePaths } from 'constants/index';
+import { toasts } from '@/utils';
+import { deleteContact } from '@/redux/contacts/operations';
+import { useAppDispatch } from '@/hooks/redux';
+import { PagePaths } from '@/constants';
 
 const useDeleteContact = () => {
   const [contactId, setContactId] = useState<string | null>(null);

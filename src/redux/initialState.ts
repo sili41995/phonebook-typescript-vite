@@ -1,4 +1,4 @@
-import { IState } from 'types/types';
+import { IState } from '@/types/types';
 
 const initialState: IState = {
   contacts: {

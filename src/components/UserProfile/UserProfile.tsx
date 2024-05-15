@@ -1,13 +1,13 @@
 import { ChangeEvent, FC, useRef, useState } from 'react';
 import { SlPhone, SlEvent, SlLocationPin } from 'react-icons/sl';
-import { IconSizes, Messages } from 'constants/index';
+import { IconSizes, Messages } from '@/constants';
 import { IProps } from './UserProfile.types';
 import { SubmitHandler } from 'react-hook-form';
-import { IAvatar } from 'types/types';
-import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
-import ImageContainer from 'components/ImageContainer';
-import { useAppDispatch } from 'hooks/redux';
-import { updateUserAvatar } from 'redux/auth/operations';
+import { IAvatar } from '@/types/types';
+import { getProfileFormData, onChangeAvatar, toasts } from '@/utils';
+import ImageContainer from '@/components/ImageContainer';
+import { useAppDispatch } from '@/hooks/redux';
+import { updateUserAvatar } from '@/redux/auth/operations';
 import {
   InfoList,
   Email,
@@ -26,8 +26,7 @@ const UserProfile: FC<IProps> = ({ user }) => {
 
   const { name, avatar, email, phone, location, lastName, dateOfBirth } = user;
   const fullName = lastName ? `${name} ${lastName}` : name;
-  const userDateOfBirth =
-    dateOfBirth && new Date(dateOfBirth).toLocaleDateString();
+  const userDateOfBirth = dateOfBirth && new Date(dateOfBirth).toLocaleDateString();
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) {

@@ -2,28 +2,17 @@ import { ChangeEvent, FC, Suspense, useRef, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { NavLink, Outlet } from 'react-router-dom';
 import { IProps } from './ContactProfile.types';
-import Loader from 'components/Loader';
-import ImageContainer from 'components/ImageContainer';
-import EditContactForm from 'components/EditContactForm';
-import { Messages, PagePaths } from 'constants/index';
-import { getProfileFormData, onChangeAvatar, toasts } from 'utils';
-import { IAvatar } from 'types/types';
-import { useAppDispatch } from 'hooks/redux';
-import { updateContactAvatar } from 'redux/contacts/operations';
-import {
-  ContactDesc,
-  ContactName,
-  ContactTitle,
-  ListItem,
-  NavBar,
-  NavList,
-} from './ContactProfile.styled';
+import Loader from '@/components/Loader';
+import ImageContainer from '@/components/ImageContainer';
+import EditContactForm from '@/components/EditContactForm';
+import { Messages, PagePaths } from '@/constants';
+import { getProfileFormData, onChangeAvatar, toasts } from '@/utils';
+import { IAvatar } from '@/types/types';
+import { useAppDispatch } from '@/hooks/redux';
+import { updateContactAvatar } from '@/redux/contacts/operations';
+import { ContactDesc, ContactName, ContactTitle, ListItem, NavBar, NavList } from './ContactProfile.styled';
 
-const ContactProfile: FC<IProps> = ({
-  contact,
-  editContact,
-  ...otherProps
-}) => {
+const ContactProfile: FC<IProps> = ({ contact, editContact, ...otherProps }) => {
   const [contactAvatar, setContactAvatar] = useState<FileList | null>(null);
   const contactAvatarRef = useRef<HTMLImageElement>(null);
   const dispatch = useAppDispatch();
